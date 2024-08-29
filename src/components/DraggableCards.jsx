@@ -3,7 +3,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { X, Edit, RefreshCw, User, Plus } from 'lucide-react';
+import { X, Edit, RefreshCw, User, Plus, Check } from 'lucide-react';
 
 const initialCards = [
   { id: '1', content: 'Years of therapy can sometimes boil down to "u see that thing u do? what if u just didn\'t"' },
@@ -95,26 +95,38 @@ const DraggableCards = ({ onProfileClick }) => {
       )}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
         <div className="flex justify-around items-center h-16">
-          <button
-            onClick={() => setEditMode(!editMode)}
-            className={`flex flex-col items-center justify-center w-1/3 h-full ${editMode ? 'text-blue-500' : 'text-gray-500'}`}
-          >
-            <Edit className="h-6 w-6 mb-1" />
-            <span className="text-xs">Edit</span>
-          </button>
-          <button
-            className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
-          >
-            <RefreshCw className="h-6 w-6 mb-1" />
-            <span className="text-xs">Review</span>
-          </button>
-          <button
-            onClick={onProfileClick}
-            className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
-          >
-            <User className="h-6 w-6 mb-1" />
-            <span className="text-xs">Profile</span>
-          </button>
+          {editMode ? (
+            <button
+              onClick={() => setEditMode(false)}
+              className="flex flex-col items-center justify-center w-full h-full text-blue-500"
+            >
+              <Check className="h-6 w-6 mb-1" />
+              <span className="text-xs">Done</span>
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={() => setEditMode(true)}
+                className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
+              >
+                <Edit className="h-6 w-6 mb-1" />
+                <span className="text-xs">Edit</span>
+              </button>
+              <button
+                className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
+              >
+                <RefreshCw className="h-6 w-6 mb-1" />
+                <span className="text-xs">Review</span>
+              </button>
+              <button
+                onClick={onProfileClick}
+                className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
+              >
+                <User className="h-6 w-6 mb-1" />
+                <span className="text-xs">Profile</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
