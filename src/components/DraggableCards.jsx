@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { X } from 'lucide-react';
 
 const DraggableCards = () => {
   const [cards, setCards] = useState([
@@ -17,6 +18,7 @@ const DraggableCards = () => {
     { id: '9', content: 'Card 9' },
     { id: '10', content: 'Card 10' },
   ]);
+  const [editMode, setEditMode] = useState(false);
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -40,12 +42,11 @@ const DraggableCards = () => {
   };
 
   return (
-    <div className="p-4">
-      <Button onClick={addCard} className="mb-4">Add Card</Button>
+    <div className="p-4 flex flex-col h-full">
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="cards">
           {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
+            <div {...provided.droppableProps} ref={provided.innerRef} className="flex-grow overflow-y-auto">
               {cards.map((card, index) => (
                 <Draggable key={card.id} draggableId={card.id} index={index}>
                   {(provided) => (
@@ -53,18 +54,29 @@ const DraggableCards = () => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className="mb-4"
+                      className="mb-4 relative"
                     >
                       <CardContent className="p-4">
-                        <Input
-                          value={card.content}
-                          onChange={(e) => editCard(card.id, e.target.value)}
-                          className="mb-2"
-                        />
+                        {editMode ? (
+                          <div className="flex items-center">
+                            <Input
+                              value={card.content}
+                              onChange={(e) => editCard(card.id, e.target.value)}
+                              className="flex-grow mr-2"
+                            />
+                            <Button 
+                              onClick={() => removeCard(card.id)} 
+                              variant="ghost" 
+                              size="icon"
+                              className="absolute top-2 right-2"
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        ) : (
+                          <p>{card.content}</p>
+                        )}
                       </CardContent>
-                      <CardFooter>
-                        <Button onClick={() => removeCard(card.id)} variant="destructive">Remove</Button>
-                      </CardFooter>
                     </Card>
                   )}
                 </Draggable>
@@ -74,6 +86,12 @@ const DraggableCards = () => {
           )}
         </Droppable>
       </DragDropContext>
+      <div className="mt-4 flex justify-between">
+        <Button onClick={addCard}>Add Card</Button>
+        <Button onClick={() => setEditMode(!editMode)}>
+          {editMode ? 'Done' : 'Edit'}
+        </Button>
+      </div>
     </div>
   );
 };
