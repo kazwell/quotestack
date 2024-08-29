@@ -54,7 +54,7 @@ const DraggableCards = () => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className="mb-3 sm:mb-4 relative"
+                      className="mb-3 sm:mb-4 relative bg-gray-100"
                     >
                       <CardContent className="p-3 sm:p-4">
                         {editMode ? (
@@ -86,7 +86,7 @@ const DraggableCards = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-100 p-4 flex justify-between">
+      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 flex justify-between">
         <Button onClick={addCard} className="text-sm sm:text-base">Add Card</Button>
         <Button onClick={() => setEditMode(!editMode)} className="text-sm sm:text-base">
           {editMode ? 'Done' : 'Edit'}
