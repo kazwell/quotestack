@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X, Edit, RefreshCw, User, Plus, Check } from 'lucide-react';
+import { cn } from "@/lib/utils";
 
 const initialCards = [
   { id: '1', content: 'Years of therapy can sometimes boil down to "u see that thing u do? what if u just didn\'t"' },
@@ -64,15 +65,19 @@ const DraggableCards = ({ onProfileClick }) => {
                             <Input
                               value={card.content}
                               onChange={(e) => editCard(card.id, e.target.value)}
-                              className="flex-grow mr-2 text-sm sm:text-base"
+                              className="flex-grow text-sm sm:text-base"
                             />
                             <Button 
                               onClick={() => removeCard(card.id)} 
-                              variant="ghost" 
+                              variant="destructive" 
                               size="icon"
-                              className="absolute top-1 right-1 sm:top-2 sm:right-2"
+                              className={cn(
+                                "ml-2 rounded-full p-1",
+                                "bg-red-500 hover:bg-red-600",
+                                "focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                              )}
                             >
-                              <X className="h-3 w-3 sm:h-4 sm:w-4" />
+                              <X className="h-4 w-4 text-white" />
                             </Button>
                           </div>
                         ) : (
