@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { X, Edit, RefreshCw, User } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { X, Edit, RefreshCw, User, Plus } from 'lucide-react';
 
 const initialCards = [
   { id: '1', content: 'Years of therapy can sometimes boil down to "u see that thing u do? what if u just didn\'t"' },
@@ -17,7 +18,7 @@ const initialCards = [
   { id: '10', content: 'If you find yourself falling into temptations, reflect on what you\'re trying to accomplish. Get clear on that and watch the focus emerge.' },
 ];
 
-const DraggableCards = () => {
+const DraggableCards = ({ onProfileClick }) => {
   const [cards, setCards] = useState(initialCards);
   const [editMode, setEditMode] = useState(false);
 
@@ -30,7 +31,7 @@ const DraggableCards = () => {
   };
 
   const addCard = () => {
-    const newCard = { id: String(cards.length + 1), content: `Card ${cards.length + 1}` };
+    const newCard = { id: String(cards.length + 1), content: `New card ${cards.length + 1}` };
     setCards([...cards, newCard]);
   };
 
@@ -87,7 +88,12 @@ const DraggableCards = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+      {editMode && (
+        <Button onClick={addCard} className="fixed bottom-20 right-4 rounded-full">
+          <Plus className="h-6 w-6" />
+        </Button>
+      )}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
         <div className="flex justify-around items-center h-16">
           <button
             onClick={() => setEditMode(!editMode)}
@@ -97,13 +103,13 @@ const DraggableCards = () => {
             <span className="text-xs">Edit</span>
           </button>
           <button
-            onClick={addCard}
             className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
           >
             <RefreshCw className="h-6 w-6 mb-1" />
             <span className="text-xs">Review</span>
           </button>
           <button
+            onClick={onProfileClick}
             className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
           >
             <User className="h-6 w-6 mb-1" />
