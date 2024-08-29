@@ -42,11 +42,11 @@ const DraggableCards = () => {
   };
 
   return (
-    <div className="p-4 flex flex-col h-full">
+    <div className="flex flex-col h-full">
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="cards">
           {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef} className="flex-grow overflow-y-auto">
+            <div {...provided.droppableProps} ref={provided.innerRef} className="flex-grow overflow-y-auto pb-20">
               {cards.map((card, index) => (
                 <Draggable key={card.id} draggableId={card.id} index={index}>
                   {(provided) => (
@@ -54,27 +54,27 @@ const DraggableCards = () => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className="mb-4 relative"
+                      className="mb-3 sm:mb-4 relative"
                     >
-                      <CardContent className="p-4">
+                      <CardContent className="p-3 sm:p-4">
                         {editMode ? (
                           <div className="flex items-center">
                             <Input
                               value={card.content}
                               onChange={(e) => editCard(card.id, e.target.value)}
-                              className="flex-grow mr-2"
+                              className="flex-grow mr-2 text-sm sm:text-base"
                             />
                             <Button 
                               onClick={() => removeCard(card.id)} 
                               variant="ghost" 
                               size="icon"
-                              className="absolute top-2 right-2"
+                              className="absolute top-1 right-1 sm:top-2 sm:right-2"
                             >
-                              <X className="h-4 w-4" />
+                              <X className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
                           </div>
                         ) : (
-                          <p>{card.content}</p>
+                          <p className="text-sm sm:text-base">{card.content}</p>
                         )}
                       </CardContent>
                     </Card>
@@ -86,9 +86,9 @@ const DraggableCards = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <div className="mt-4 flex justify-between">
-        <Button onClick={addCard}>Add Card</Button>
-        <Button onClick={() => setEditMode(!editMode)}>
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-100 p-4 flex justify-between">
+        <Button onClick={addCard} className="text-sm sm:text-base">Add Card</Button>
+        <Button onClick={() => setEditMode(!editMode)} className="text-sm sm:text-base">
           {editMode ? 'Done' : 'Edit'}
         </Button>
       </div>
