@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { X, Edit, RefreshCw, User, Plus, Check } from 'lucide-react';
+import { X, Edit, RefreshCw, User } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
 const initialCards = [
@@ -22,6 +22,15 @@ const initialCards = [
 const DraggableCards = ({ onProfileClick }) => {
   const [cards, setCards] = useState(initialCards);
   const [editMode, setEditMode] = useState(false);
+  const [newCardId, setNewCardId] = useState(null);
+  const newCardRef = useRef(null);
+
+  useEffect(() => {
+    if (newCardId && newCardRef.current) {
+      newCardRef.current.scrollIntoView({ behavior: 'smooth' });
+      newCardRef.current.focus();
+    }
+  }, [newCardId]);
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -32,18 +41,10 @@ const DraggableCards = ({ onProfileClick }) => {
   };
 
   const addCard = () => {
-    const newCard = { id: String(cards.length + 1), content: `New card ${cards.length + 1}` };
+    const newCard = { id: String(cards.length + 1), content: '' };
     setCards([...cards, newCard]);
-    setTimeout(() => {
-      const newCardElement = document.getElementById(`card-${newCard.id}`);
-      if (newCardElement) {
-        newCardElement.scrollIntoView({ behavior: 'smooth' });
-        const inputElement = newCardElement.querySelector('input');
-        if (inputElement) {
-          inputElement.focus();
-        }
-      }
-    }, 0);
+    setNewCardId(newCard.id);
+    setEditMode(true);
   };
 
   const removeCard = (id) => {
@@ -75,23 +76,24 @@ const DraggableCards = ({ onProfileClick }) => {
                             <Input
                               value={card.content}
                               onChange={(e) => editCard(card.id, e.target.value)}
-                              className="flex-grow text-sm sm:text-base font-serif"
+                              className="flex-grow text-base sm:text-lg font-serif"
+                              ref={card.id === newCardId ? newCardRef : null}
                             />
                             <Button 
                               onClick={() => removeCard(card.id)} 
                               variant="destructive" 
                               size="icon"
                               className={cn(
-                                "ml-2 rounded-full p-1 w-8 h-8 flex items-center justify-center",
+                                "ml-2 rounded-full p-1 w-6 h-6 flex items-center justify-center",
                                 "bg-red-500 hover:bg-red-600",
                                 "focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
                               )}
                             >
-                              <X className="h-4 w-4 text-white" />
+                              <X className="h-3 w-3 text-white" />
                             </Button>
                           </div>
                         ) : (
-                          <p className="text-sm sm:text-base leading-relaxed font-serif">{card.content}</p>
+                          <p className="text-base sm:text-lg leading-relaxed font-serif">{card.content}</p>
                         )}
                       </CardContent>
                     </Card>
@@ -108,16 +110,16 @@ const DraggableCards = ({ onProfileClick }) => {
           {editMode ? (
             <>
               <button
-                onClick={() => setEditMode(false)}
+                onClick={() => {
+                  setEditMode(false);
+                  setNewCardId(null);
+                }}
                 className="flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-md"
               >
                 <span>Save</span>
               </button>
               <button
-                onClick={() => {
-                  addCard();
-                  // Logic to focus on the new card will be added here
-                }}
+                onClick={addCard}
                 className="flex items-center justify-center px-4 py-2 bg-green-500 text-white rounded-md"
               >
                 <span>Add</span>
