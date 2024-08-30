@@ -1,39 +1,47 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const Profile = ({ onBackClick }) => {
   return (
-    <div className="w-full max-w-md mx-auto mt-8">
-      <Card>
-        <CardHeader className="flex flex-col items-center">
-          <Avatar className="w-24 h-24">
-            <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-            <AvatarFallback>AK</AvatarFallback>
-          </Avatar>
-          <CardTitle className="mt-4 text-2xl font-bold">Adam Kazwell</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center">
-            <p className="text-gray-600">@kaz</p>
-            <p className="mt-2 text-sm text-gray-500">Member since: August 2024</p>
-            <div className="flex justify-center mt-4 space-x-4">
-              <p className="text-sm text-gray-600"><span className="font-bold">73</span> followers</p>
-              <p className="text-sm text-gray-600"><span className="font-bold">54</span> following</p>
+    <div className="w-full max-w-md mx-auto mt-4">
+      <Card className="bg-gray-100 shadow-md">
+        <CardContent className="p-6">
+          <div className="flex items-center mb-4">
+            <Avatar className="w-16 h-16 mr-4">
+              <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+              <AvatarFallback>AK</AvatarFallback>
+            </Avatar>
+            <div>
+              <h2 className="text-2xl font-bold">Adam Kazwell</h2>
+              <p className="text-gray-600">@kaz</p>
+              <p className="text-sm text-gray-500">Member since...</p>
             </div>
-            <div className="flex justify-center mt-4 space-x-4">
-              <p className="text-sm text-gray-600"><span className="font-bold">15</span> quotes grabbed</p>
-              <p className="text-sm text-gray-600"><span className="font-bold">27</span> quotes snagged</p>
+          </div>
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="text-center">
+              <p className="font-bold">73</p>
+              <p className="text-sm text-gray-600">followers</p>
+            </div>
+            <div className="text-center">
+              <p className="font-bold">54</p>
+              <p className="text-sm text-gray-600">following</p>
+            </div>
+          </div>
+          <Separator className="my-4" />
+          <div className="space-y-2">
+            <div className="flex justify-between items-center">
+              <p className="text-sm">15 quotes grabbed</p>
+              <button className="text-sm text-blue-500 hover:underline">see them</button>
+            </div>
+            <div className="flex justify-between items-center">
+              <p className="text-sm">27 quotes snagged</p>
+              <button className="text-sm text-blue-500 hover:underline">see them</button>
             </div>
           </div>
         </CardContent>
       </Card>
-      <button
-        onClick={onBackClick}
-        className="mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-      >
-        Back to Cards
-      </button>
     </div>
   );
 };
