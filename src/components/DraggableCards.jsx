@@ -139,6 +139,7 @@ const DraggableCards = () => {
                 <span className="text-xs">Edit</span>
               </button>
               <button
+                onClick={() => navigate('/')}
                 className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
               >
                 <RefreshCw className="h-6 w-6 mb-1" />
