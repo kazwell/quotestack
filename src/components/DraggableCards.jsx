@@ -3,8 +3,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { X, Edit, RefreshCw, User } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
 const initialCards = [
@@ -15,15 +14,13 @@ const initialCards = [
   { id: '5', content: 'Self esteem comes from keeping promises to yourself. If you have a good reputation with yourself, who cares what other people think about you.' },
 ];
 
-const DraggableCards = () => {
+const DraggableCards = ({ editMode }) => {
   const [cards, setCards] = useState(() => {
     const savedCards = localStorage.getItem('cards');
     return savedCards ? JSON.parse(savedCards) : initialCards;
   });
-  const [editMode, setEditMode] = useState(false);
   const [newCardId, setNewCardId] = useState(null);
   const newCardRef = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (newCardId && newCardRef.current) {
@@ -48,7 +45,6 @@ const DraggableCards = () => {
     const newCard = { id: String(cards.length + 1), content: '' };
     setCards([...cards, newCard]);
     setNewCardId(newCard.id);
-    setEditMode(true);
   };
 
   const removeCard = (id) => {
@@ -109,53 +105,16 @@ const DraggableCards = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
-        <div className="flex justify-between items-center h-16 px-4">
-          {editMode ? (
-            <>
-              <button
-                onClick={() => {
-                  setEditMode(false);
-                  setNewCardId(null);
-                }}
-                className="flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-md"
-              >
-                <span>Save</span>
-              </button>
-              <button
-                onClick={addCard}
-                className="flex items-center justify-center px-4 py-2 bg-green-500 text-white rounded-md"
-              >
-                <span>Add</span>
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={() => setEditMode(true)}
-                className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
-              >
-                <Edit className="h-6 w-6 mb-1" />
-                <span className="text-xs">Edit</span>
-              </button>
-              <button
-                onClick={() => navigate('/')}
-                className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
-              >
-                <RefreshCw className="h-6 w-6 mb-1" />
-                <span className="text-xs">Review</span>
-              </button>
-              <button
-                onClick={() => navigate('/profile')}
-                className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
-              >
-                <User className="h-6 w-6 mb-1" />
-                <span className="text-xs">Profile</span>
-              </button>
-            </>
-          )}
+      {editMode && (
+        <div className="fixed bottom-16 right-4">
+          <Button
+            onClick={addCard}
+            className="rounded-full w-12 h-12 bg-green-500 hover:bg-green-600 text-white text-2xl font-bold"
+          >
+            +
+          </Button>
         </div>
-      </div>
+      )}
     </div>
   );
 };
