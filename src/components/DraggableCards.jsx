@@ -8,15 +8,15 @@ import { cn } from "@/lib/utils";
 
 const initialCards = [
   { id: '1', content: 'Years of therapy can sometimes boil down to "u see that thing u do? what if u just didn\'t"' },
-  { id: '2', content: 'I have been guilty of trying to optimize the "right now" to stop the discomfort I'm experiencing....but remember the future is muuuch longer than the moment you're in now.' },
-  { id: '3', content: 'If you're doing something bad, it's going to catch you. Please, I'm begging - take each moment seriously. The real struggle is here, now, in these quiet moments. Now it is being decided whether, in your supreme day, you shall fail miserably or gloriously conquer.' },
+  { id: '2', content: 'I have been guilty of trying to optimize the "right now" to stop the discomfort I\'m experiencing....but remember the future is muuuch longer than the moment you\'re in now.' },
+  { id: '3', content: 'If you\'re doing something bad, it\'s going to catch you. Please, I\'m begging - take each moment seriously. The real struggle is here, now, in these quiet moments. Now it is being decided whether, in your supreme day, you shall fail miserably or gloriously conquer.' },
   { id: '4', content: 'Every time you make a choice, it changes a little part of you—the part that makes decisions. Over time, all the choices you make shape who you become. Your life is like a journey where you gradually turn yourself into either a good person or a bad person....if you keep making bad choices, you become more angry, hateful, and disconnected. This is like becoming a "hellish creature," full of madness, horror, and loneliness.' },
   { id: '5', content: 'Separate the urge from the behavior. Learn to delay your response.' },
-  { id: '6', content: 'To become the person you want, mimic your idea of that person. All the world's a stage baby, how would Zack and Clayton act?' },
+  { id: '6', content: 'To become the person you want, mimic your idea of that person. All the world\'s a stage baby, how would Zack and Clayton act?' },
   { id: '7', content: 'In relationships, instead of measuring "how much am I getting", start measuring "how much am I giving?"' },
-  { id: '8', content: 'I'm focused on improving my relationships. Strengthening my self-esteem is an essential first step for that.' },
+  { id: '8', content: 'I\'m focused on improving my relationships. Strengthening my self-esteem is an essential first step for that.' },
   { id: '9', content: 'Self esteem comes from keeping promises to yourself. If you have a good reputation with yourself, who cares what other people think about you.' },
-  { id: '10', content: 'If you find yourself falling into temptations, reflect on what you're trying to accomplish. Get clear on that and watch the focus emerge.' },
+  { id: '10', content: 'If you find yourself falling into temptations, reflect on what you\'re trying to accomplish. Get clear on that and watch the focus emerge.' },
 ];
 
 const DraggableCards = ({ onProfileClick }) => {
