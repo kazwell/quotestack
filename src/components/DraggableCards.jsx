@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X, Edit, RefreshCw, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 
 const initialCards = [
@@ -19,11 +20,12 @@ const initialCards = [
   { id: '10', content: 'If you find yourself falling into temptations, reflect on what you\'re trying to accomplish. Get clear on that and watch the focus emerge.' },
 ];
 
-const DraggableCards = ({ onProfileClick }) => {
+const DraggableCards = () => {
   const [cards, setCards] = useState(initialCards);
   const [editMode, setEditMode] = useState(false);
   const [newCardId, setNewCardId] = useState(null);
   const newCardRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (newCardId && newCardRef.current) {
@@ -141,7 +143,7 @@ const DraggableCards = ({ onProfileClick }) => {
                 <span className="text-xs">Review</span>
               </button>
               <button
-                onClick={onProfileClick}
+                onClick={() => navigate('/profile')}
                 className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
               >
                 <User className="h-6 w-6 mb-1" />
