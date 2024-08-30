@@ -34,6 +34,16 @@ const DraggableCards = ({ onProfileClick }) => {
   const addCard = () => {
     const newCard = { id: String(cards.length + 1), content: `New card ${cards.length + 1}` };
     setCards([...cards, newCard]);
+    setTimeout(() => {
+      const newCardElement = document.getElementById(`card-${newCard.id}`);
+      if (newCardElement) {
+        newCardElement.scrollIntoView({ behavior: 'smooth' });
+        const inputElement = newCardElement.querySelector('input');
+        if (inputElement) {
+          inputElement.focus();
+        }
+      }
+    }, 0);
   };
 
   const removeCard = (id) => {
@@ -65,14 +75,14 @@ const DraggableCards = ({ onProfileClick }) => {
                             <Input
                               value={card.content}
                               onChange={(e) => editCard(card.id, e.target.value)}
-                              className="flex-grow text-sm sm:text-base"
+                              className="flex-grow text-sm sm:text-base font-serif"
                             />
                             <Button 
                               onClick={() => removeCard(card.id)} 
                               variant="destructive" 
                               size="icon"
                               className={cn(
-                                "ml-2 rounded-full p-1",
+                                "ml-2 rounded-full p-1 w-8 h-8 flex items-center justify-center",
                                 "bg-red-500 hover:bg-red-600",
                                 "focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
                               )}
@@ -81,7 +91,7 @@ const DraggableCards = ({ onProfileClick }) => {
                             </Button>
                           </div>
                         ) : (
-                          <p className="text-sm sm:text-base leading-relaxed">{card.content}</p>
+                          <p className="text-sm sm:text-base leading-relaxed font-serif">{card.content}</p>
                         )}
                       </CardContent>
                     </Card>
@@ -93,21 +103,26 @@ const DraggableCards = ({ onProfileClick }) => {
           )}
         </Droppable>
       </DragDropContext>
-      {editMode && (
-        <Button onClick={addCard} className="fixed bottom-20 right-4 rounded-full">
-          <Plus className="h-6 w-6" />
-        </Button>
-      )}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
-        <div className="flex justify-around items-center h-16">
+        <div className="flex justify-between items-center h-16 px-4">
           {editMode ? (
-            <button
-              onClick={() => setEditMode(false)}
-              className="flex flex-col items-center justify-center w-full h-full text-blue-500"
-            >
-              <Check className="h-6 w-6 mb-1" />
-              <span className="text-xs">Done</span>
-            </button>
+            <>
+              <button
+                onClick={() => setEditMode(false)}
+                className="flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-md"
+              >
+                <span>Save</span>
+              </button>
+              <button
+                onClick={() => {
+                  addCard();
+                  // Logic to focus on the new card will be added here
+                }}
+                className="flex items-center justify-center px-4 py-2 bg-green-500 text-white rounded-md"
+              >
+                <span>Add</span>
+              </button>
+            </>
           ) : (
             <>
               <button
