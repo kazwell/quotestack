@@ -1,8 +1,8 @@
 import React from 'react';
-import { Edit, RefreshCw, User } from 'lucide-react';
+import { Edit, RefreshCw, User, Save } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Toolbar = ({ onEditClick }) => {
+const Toolbar = ({ onEditClick, editMode }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -13,8 +13,17 @@ const Toolbar = ({ onEditClick }) => {
           onClick={onEditClick}
           className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"
         >
-          <Edit className="h-6 w-6 mb-1" />
-          <span className="text-xs">Edit</span>
+          {editMode ? (
+            <>
+              <Save className="h-6 w-6 mb-1" />
+              <span className="text-xs">Save</span>
+            </>
+          ) : (
+            <>
+              <Edit className="h-6 w-6 mb-1" />
+              <span className="text-xs">Edit</span>
+            </>
+          )}
         </button>
         <button
           className="flex flex-col items-center justify-center w-1/3 h-full text-gray-500"

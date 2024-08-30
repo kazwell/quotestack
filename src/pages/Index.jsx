@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DraggableCards from '../components/DraggableCards';
+import Toolbar from '../components/Toolbar';
 import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const navigate = useNavigate();
+  const [editMode, setEditMode] = useState(false);
 
-  const handleProfileClick = () => {
-    navigate('/profile');
+  const handleEditClick = () => {
+    setEditMode(!editMode);
   };
 
   return (
@@ -16,9 +18,10 @@ const Index = () => {
           <span className="font-normal">(re)</span><span className="font-bold">mindset</span>
         </h1>
         <div className="flex-grow overflow-hidden">
-          <DraggableCards onProfileClick={handleProfileClick} />
+          <DraggableCards editMode={editMode} />
         </div>
       </div>
+      <Toolbar onEditClick={handleEditClick} editMode={editMode} />
     </div>
   );
 };

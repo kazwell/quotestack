@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from '../components/Profile';
+import Toolbar from '../components/Toolbar';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
@@ -17,6 +18,7 @@ const ProfilePage = () => {
         </h1>
         <Profile onBackClick={handleBackClick} />
       </div>
+      <Toolbar />
     </div>
   );
 };
