@@ -6,13 +6,8 @@ import { Button } from "@/components/ui/button";
 import { X } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
-const initialCards = [];
-
 const DraggableCards = ({ editMode }) => {
-  const [cards, setCards] = useState(() => {
-    const savedCards = localStorage.getItem('cards');
-    return savedCards ? JSON.parse(savedCards) : initialCards;
-  });
+  const [cards, setCards] = useState([]);
   const [newCardId, setNewCardId] = useState(null);
   const newCardRef = useRef(null);
 
