@@ -6,8 +6,6 @@ import Index from "./pages/Index";
 import FeedPage from "./pages/FeedPage";
 import UpdatesPage from "./pages/UpdatesPage";
 import ProfilePage from "./pages/ProfilePage";
-import UserProfile from "./components/UserProfile";
-import UserQuotesPage from "./pages/UserQuotesPage";
 
 const queryClient = new QueryClient();
 
@@ -22,8 +20,6 @@ const App = () => (
           <Route path="/review" element={<Index />} />
           <Route path="/updates" element={<UpdatesPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/user/:username" element={<UserProfile />} />
-          <Route path="/user/:username/quotes" element={<UserQuotesPage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

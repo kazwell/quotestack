@@ -32,11 +32,11 @@ const Profile = ({ onBackClick }) => {
           <Separator className="my-4" />
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <p className="text-sm">15 quotes posted</p>
+              <p className="text-sm">15 quotes grabbed</p>
               <button className="text-sm text-blue-500 hover:underline">see them</button>
             </div>
             <div className="flex justify-between items-center">
-              <p className="text-sm">27 quotes grabbed</p>
+              <p className="text-sm">27 quotes snagged</p>
               <button className="text-sm text-blue-500 hover:underline">see them</button>
             </div>
           </div>
