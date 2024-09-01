@@ -5,6 +5,10 @@ import { Separator } from "@/components/ui/separator";
 import { Link } from 'react-router-dom';
 
 const UserProfile = ({ user }) => {
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="w-full max-w-md mx-auto mt-4">
       <Card className="bg-gray-100 shadow-md">
@@ -12,7 +16,7 @@ const UserProfile = ({ user }) => {
           <div className="flex items-center mb-4">
             <Avatar className="w-16 h-16 mr-4">
               <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback>{user.initials}</AvatarFallback>
+              <AvatarFallback>{user.initials || user.name?.charAt(0)}</AvatarFallback>
             </Avatar>
             <div>
               <h2 className="text-2xl font-bold">{user.name}</h2>
