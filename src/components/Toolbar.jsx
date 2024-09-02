@@ -24,28 +24,20 @@ const Toolbar = () => {
             onClick={() => navigate(item.path)}
             className={cn(
               "flex flex-col items-center justify-center w-1/5 h-full relative",
-              item.label === 'Review' && "font-bold",
               location.pathname === item.path
-                ? item.label === 'Review'
-                  ? "text-blue-600 scale-110"
-                  : "text-blue-500"
-                : item.label === 'Review'
-                ? "text-blue-400"
+                ? "text-blue-500"
                 : "text-gray-500"
             )}
           >
             {React.cloneElement(item.icon, {
               className: cn(
                 item.icon.props.className,
-                item.label === 'Review' && "text-blue-600"
+                location.pathname === item.path ? "text-blue-500" : "text-gray-500"
               ),
             })}
-            <span className={cn(
-              "text-xs",
-              item.label === 'Review' && "text-blue-600"
-            )}>{item.label}</span>
+            <span className="text-xs">{item.label}</span>
             {location.pathname === item.path && (
-              <div className="absolute top-0 left-0 right-0 h-1 bg-blue-600" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-blue-500" />
             )}
           </button>
         ))}
