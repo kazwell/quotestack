@@ -3,6 +3,7 @@ import Profile from '../components/Profile';
 import Toolbar from '../components/Toolbar';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("quotes");
