@@ -1,6 +1,7 @@
 import React from 'react';
 import { Edit, Rss, RefreshCw, Bell, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { cn } from "@/lib/utils";
 
 const Toolbar = () => {
   const navigate = useNavigate();
@@ -21,18 +22,29 @@ const Toolbar = () => {
           <button
             key={item.label}
             onClick={() => navigate(item.path)}
-            className={`flex flex-col items-center justify-center w-1/5 h-full ${
+            className={cn(
+              "flex flex-col items-center justify-center w-1/5 h-full",
+              item.label === 'Review' && "font-bold",
               location.pathname === item.path
                 ? item.label === 'Review'
-                  ? 'text-blue-600 font-bold'
-                  : 'text-blue-500'
-                : 'text-gray-500'
-            } ${
-              item.label === 'Review' ? 'scale-110' : ''
-            }`}
+                  ? "text-blue-600 scale-110"
+                  : "text-blue-500"
+                : item.label === 'Review'
+                ? "text-blue-400"
+                : "text-gray-500",
+              item.label === 'Review' && "border-t-4 border-blue-600"
+            )}
           >
-            {item.icon}
-            <span className="text-xs">{item.label}</span>
+            {React.cloneElement(item.icon, {
+              className: cn(
+                item.icon.props.className,
+                item.label === 'Review' && "text-blue-600"
+              ),
+            })}
+            <span className={cn(
+              "text-xs",
+              item.label === 'Review' && "text-blue-600"
+            )}>{item.label}</span>
           </button>
         ))}
       </div>
