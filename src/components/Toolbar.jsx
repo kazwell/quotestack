@@ -7,9 +7,9 @@ const Toolbar = () => {
   const location = useLocation();
 
   const navItems = [
-    { icon: <Edit className="h-6 w-6 mb-1" />, label: 'Edit', path: '/' },
-    { icon: <Rss className="h-6 w-6 mb-1" />, label: 'Feed', path: '/feed' },
     { icon: <RefreshCw className="h-6 w-6 mb-1" />, label: 'Review', path: '/review' },
+    { icon: <Edit className="h-6 w-6 mb-1" />, label: 'Edit', path: '/edit' },
+    { icon: <Rss className="h-6 w-6 mb-1" />, label: 'Feed', path: '/feed' },
     { icon: <Bell className="h-6 w-6 mb-1" />, label: 'Updates', path: '/updates' },
     { icon: <User className="h-6 w-6 mb-1" />, label: 'Profile', path: '/profile' },
   ];
